@@ -1,0 +1,109 @@
+.score {
+  padding: 10px;
+}
+
+.score > .score--container {
+  overflow: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 30px;
+  height: auto;
+  margin-top: 0.5rem;
+}
+
+.score > .score--container .score--svg {
+  width: 35vw;
+  height: 60vh;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.score > .score--container .score--svg > img {
+  height: 100%;
+  width: 100%;
+}
+
+.score > .score--container .score--svg-par {
+  font-size: 0.9rem;
+  font-family: var(--primary-font);
+  padding: 5px;
+}
+
+.score > .score--container .score--form {
+  width: 65vh;
+  padding: 10px;
+  height: auto;
+  margin-top: 1rem;
+}
+
+.score > .score--container .score--form > form {
+  padding: 5px;
+}
+
+.score > .score--container .score--form > form > h4 {
+  color: var(--dark-color);
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-family: var(--primary-font);
+}
+
+.score > .score--container .score--form > form > .form-group {
+  margin: 3px 0;
+}
+
+.score > .score--container .score--form > form > .form-group > label {
+  font-family: var(--primary-font);
+  color: #555;
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+
+.score > .score--container .score--form > form > .form-group > .form-control {
+  border-radius: 3px !important;
+  height: 3rem !important;
+  border: 1px solid #eeeeee;
+}
+
+.score > .score--container .score--form > form > .form-group > .form-control:focus {
+  outline: none !important;
+}
+
+.score > .score--container .score--form > form > .form-group > .form-control::-webkit-input-placeholder {
+  font-size: 0.8rem;
+  font-family: var(--primary-font);
+  color: #cccccc;
+  margin-left: 10px;
+}
+
+.score > .score--container .score--form > form > .form-group > .form-control:-ms-input-placeholder {
+  font-size: 0.8rem;
+  font-family: var(--primary-font);
+  color: #cccccc;
+  margin-left: 10px;
+}
+
+.score > .score--container .score--form > form > .form-group > .form-control::-ms-input-placeholder {
+  font-size: 0.8rem;
+  font-family: var(--primary-font);
+  color: #cccccc;
+  margin-left: 10px;
+}
+
+.score > .score--container .score--form > form > .form-group > .form-control::placeholder {
+  font-size: 0.8rem;
+  font-family: var(--primary-font);
+  color: #cccccc;
+  margin-left: 10px;
+}
+
+.score > .score--container .score--form > form > .button > .score-btn {
+  height: 3rem;
+  border-radius: 3px;
+  background: var(--primary-color);
+  margin: 10px 0;
+}
+/*# sourceMappingURL=score.css.map */

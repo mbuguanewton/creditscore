@@ -1,0 +1,92 @@
+.home--container {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  background: var(--white-color);
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+}
+
+.home--container > .colored--div {
+  max-height: 80vh;
+  padding: 0;
+  width: 60vw;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 0;
+  margin-left: 0;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.home--container > .colored--div > img {
+  width: 100%;
+  height: 100%;
+}
+
+.home--container > .home--content {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  margin-top: 7rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 1rem;
+}
+
+.home--container > .home--content .home--content-about {
+  height: 70vh;
+  width: 40%;
+  color: var(--white-color);
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.home--container > .home--content .home--content-svg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 70vh;
+  width: 50%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.home--container > .home--content .home--content-svg > img {
+  width: 400px;
+  height: 400px;
+}
+
+.home--container > .home--content .home--content-svg .login {
+  background: var(--primary-color);
+  width: 20rem;
+  height: 3.5rem;
+  border-radius: 5px;
+  padding: 15px;
+  color: var(--white-color);
+}
+
+.home--container > .home--content .home--content-svg .login:hover {
+  text-decoration: none;
+  color: var(--white-color);
+}
+/*# sourceMappingURL=index.css.map */

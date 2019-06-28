@@ -1,0 +1,83 @@
+.nav--container {
+  height: 5rem;
+  width: 100%;
+  background: var(--white-color);
+  position: fixed;
+  z-index: 200;
+  border-bottom: 0.5px solid #eeeeee;
+}
+
+.nav--container > .nav--wrapper {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.nav--container > .nav--wrapper .nav--wrapper-logo {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  margin-left: 2rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.nav--container > .nav--wrapper .nav--wrapper-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-right: 2rem;
+}
+
+.nav--container > .nav--wrapper .nav--wrapper-container .nav--wrapper-links > ul {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 1rem;
+}
+
+.nav--container > .nav--wrapper .nav--wrapper-container .nav--wrapper-links > ul > li {
+  margin: 0 1rem;
+}
+
+.nav--container > .nav--wrapper .nav--wrapper-container .nav--wrapper-links > ul > li > a {
+  text-decoration: none;
+  color: var(--dark-color);
+  font-size: 0.9rem;
+}
+
+.nav--container > .nav--wrapper .nav--wrapper-container .login {
+  background: var(--primary-color);
+  width: 7rem;
+  height: 3rem;
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--white-color);
+}
+/*# sourceMappingURL=navbar.css.map */
