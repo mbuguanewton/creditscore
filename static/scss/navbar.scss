@@ -48,6 +48,12 @@
           }
         }
       }
+      .username {
+        color: var(--dark-color);
+        margin-right: 1.5rem;
+        text-transform: lowercase;
+        font-weight: 600;
+      }
 
       .login {
         background: var(--primary-color);

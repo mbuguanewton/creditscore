@@ -338,6 +338,13 @@ a:hover {
   font-size: 0.9rem;
 }
 
+.nav--container > .nav--wrapper .nav--wrapper-container .username {
+  color: var(--dark-color);
+  margin-right: 1.5rem;
+  text-transform: lowercase;
+  font-weight: 600;
+}
+
 .nav--container > .nav--wrapper .nav--wrapper-container .login {
   background: var(--primary-color);
   width: 7rem;
