@@ -6,7 +6,7 @@ from flask_pymongo import MongoClient
 import os
 
 # mongodb setup
-uri = 'mongodb+srv://creditor:creditor123@creditscore-fs5ta.gcp.mongodb.net/test?retryWrites=true&w=majority'S
+uri = 'mongodb+srv://creditor:creditor123@creditscore-fs5ta.gcp.mongodb.net/test?retryWrites=true&w=majority'
 client = MongoClient(uri, connectTimeoutMS=30000, connect=False)
 db = client.creditdb
 
