@@ -5,8 +5,11 @@ from dotenv import load_dotenv
 from flask_pymongo import MongoClient
 import os
 
+# load env variables
+load_dotenv(verbose=True)
+
 # mongodb setup
-uri = 'mongodb+srv://creditor:creditor123@creditscore-fs5ta.gcp.mongodb.net/test?retryWrites=true&w=majority'
+uri = os.getenv('MONGO_URI')
 client = MongoClient(uri, connectTimeoutMS=30000, connect=False)
 db = client.creditdb
 
