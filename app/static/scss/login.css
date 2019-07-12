@@ -1,0 +1,78 @@
+.form--container {
+  width: 40%;
+  margin: 0 30%;
+  padding: 20px;
+}
+
+.form--container > form {
+  margin: 4.5rem 0;
+  padding: 10px;
+}
+
+.form--container > form > h4 {
+  color: var(--dark-color);
+  font-size: 1.7rem;
+  font-weight: 600;
+  font-family: var(--primary-font);
+}
+
+.form--container > form > .form-group {
+  margin: 5px 0;
+}
+
+.form--container > form > .form-group > label {
+  font-family: var(--primary-font);
+  color: #555;
+  margin: 10px 0;
+}
+
+.form--container > form > .form-group > .form-control {
+  border-radius: 3px !important;
+  height: 3rem !important;
+  border: 1px solid #d2d2d2;
+}
+
+.form--container > form > .form-group > .form-control:focus {
+  outline: none !important;
+}
+
+.form--container > form > .form-group > .form-control::-webkit-input-placeholder {
+  font-size: 0.8rem;
+  font-family: var(--primary-font);
+  color: #cccccc;
+  margin-left: 10px;
+}
+
+.form--container > form > .form-group > .form-control:-ms-input-placeholder {
+  font-size: 0.8rem;
+  font-family: var(--primary-font);
+  color: #cccccc;
+  margin-left: 10px;
+}
+
+.form--container > form > .form-group > .form-control::-ms-input-placeholder {
+  font-size: 0.8rem;
+  font-family: var(--primary-font);
+  color: #cccccc;
+  margin-left: 10px;
+}
+
+.form--container > form > .form-group > .form-control::placeholder {
+  font-size: 0.8rem;
+  font-family: var(--primary-font);
+  color: #cccccc;
+  margin-left: 10px;
+}
+
+.form--container > form > .button > .login-btn {
+  height: 3rem;
+  border-radius: 3px;
+  background: var(--primary-color);
+  margin: 10px 0;
+}
+
+.form--container > form > p {
+  font-size: 0.95rem;
+  margin: 10px 0;
+}
+/*# sourceMappingURL=login.css.map */

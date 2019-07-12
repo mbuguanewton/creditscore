@@ -1,0 +1,30 @@
+{% extends 'layouts.html' %} {% block body%}
+<div class="container-fluid">
+  <div class="accounts--container">
+    <aside class="side--bar">
+      <div class="account--info">
+        <h3 class="account--info-name">
+          <i class="fas fa-user"></i>{{ session.name }}
+        </h3>
+        <h6 class="account--info-email">
+          <i class="fas fa-envelope"></i>{{ session.email }}
+        </h6>
+        <h5 class="account--info-id"></h5>
+      </div>
+      <div class="accounts--nav">
+        <a href=""><i class="fas fa-columns"></i>Overview</a>
+        <a href=""><i class="fas fa-file-alt"></i>Reports</a>
+        <a href=""><i class="fas fa-info"></i>More information</a>
+      </div>
+    </aside>
+
+    <main class="main--bar">
+      <div class="container">
+        <h4>
+          Hello {{ session.name }}, this is where you will find your information
+        </h4>
+      </div>
+    </main>
+  </div>
+</div>
+{% endblock body%}

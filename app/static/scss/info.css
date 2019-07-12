@@ -1,0 +1,9 @@
+.info--container {
+  background: var(--primary-color);
+  width: 60%;
+  margin: 0 20%;
+  padding: 10px;
+  color: #fff;
+  height: 88vh;
+}
+/*# sourceMappingURL=info.css.map */

@@ -1,0 +1,32 @@
+<nav class="nav--container">
+  <div class="nav--wrapper">
+    <div class="nav--wrapper-logo">
+      <h4>Credit Scorer</h4>
+    </div>
+    <div class="nav--wrapper-container">
+      <div class="nav--wrapper-links">
+        <ul class="links-ul">
+          <li class="ul-item"><a href="{{ url_for('api.index') }}">Home</a></li>
+          {% if session['username'] %}
+          <li class="ul-item">
+            <a href="{{ url_for('api.score') }}">Score</a>
+          </li>
+          {% endif %}
+          <li class="ul-item">
+            <a href="{{ url_for('api.info') }}">Information</a>
+          </li>
+        </ul>
+      </div>
+      {% if session['username'] %}
+      <a href="{{ url_for('api.account') }}" class="username"
+        ><i class="fas fa-user-alt ml-2"
+          ><span class="ml-2">{{ session.username }}</span></i
+        ></a
+      >
+      <a href="{{ url_for('api.logout') }}" class="btn login">logout</a>
+      {% else %}
+      <a href="{{ url_for('api.login') }}" class="btn login">login</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

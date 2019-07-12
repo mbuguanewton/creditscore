@@ -1,0 +1,74 @@
+.home--container {
+  padding: 0;
+  margin: 0;
+  height: 88vh;
+  background: var(--white-color);
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+
+  & > .colored--div {
+    max-height: 80vh;
+    padding: 0;
+    width: 60vw;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 0;
+    margin-left: 0;
+    object-fit: contain;
+
+    & > img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  & > .home--content {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+
+    .home--content-about {
+      height: 70vh;
+      width: 40%;
+      color: var(--white-color);
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+    .home--content-svg {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 70vh;
+      width: 50%;
+      object-fit: contain;
+
+      & > img {
+        width: 400px;
+        height: 400px;
+      }
+
+      .login {
+        background: var(--primary-color);
+        width: 20rem;
+        height: 3.5rem;
+        border-radius: 5px;
+        padding: 15px;
+        color: var(--white-color);
+
+        &:hover {
+          text-decoration: none;
+          color: var(--white-color);
+        }
+      }
+    }
+  }
+}

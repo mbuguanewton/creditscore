@@ -16,6 +16,7 @@ flask-login = "*"
 python-dotenv = "*"
 flask-pymongo = "*"
 bcrypt = "*"
+flask-scss = "*"
 
 [requires]
 python_version = "3.6"
