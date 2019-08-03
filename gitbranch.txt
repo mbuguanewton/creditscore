@@ -1,0 +1,14 @@
+# branches
+* create branch
+    - git checkout -b <branch name> <under with main branch>
+* check for available branches
+    - git branch -a
+* move to a specific branch
+    - git checkout <branch name> ## for existing branches
+
+
+# remotes
+* add a remote
+    - git remote add <remote name> <github remote url>
+* check for available remotes
+    - git remote -v
