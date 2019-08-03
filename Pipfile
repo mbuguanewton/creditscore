@@ -7,16 +7,6 @@ verify_ssl = true
 autopep8 = "*"
 
 [packages]
-flask = "*"
-flask-assets = "*"
-dnspython = "*"
-gunicorn = "*"
-flask-sqlalchemy = "*"
-flask-login = "*"
-python-dotenv = "*"
-flask-pymongo = "*"
-bcrypt = "*"
-flask-scss = "*"
 
 [requires]
 python_version = "3.6"

@@ -1,20 +1,18 @@
 
+from .views import api
 from flask import Flask, url_for
 from flask_assets import Environment, Bundle
 from dotenv import load_dotenv
-from flask_pymongo import MongoClient
+from flask_fontawesome import FontAwesome
+from flask_scss import Scss
 import os
 
 # load env variables
 load_dotenv(verbose=True)
 
-# mongodb setup
-uri = os.getenv('MONGO_URI')
-client = MongoClient(uri, connectTimeoutMS=30000, connect=False)
-db = client.creditdb
-
 # initialise assets environment to the app
 assets = Environment()
+fa = FontAwesome()
 
 # create function that returns the app
 
@@ -25,18 +23,20 @@ def create_app():
 
     # app secret
     SECRET_KEY = os.urandom(64)
-    app.config['SECRET_KEY'] = SECRET_KEY
     # load environmental variables
+
     load_dotenv(verbose=True)
 
     # import blueprint
-    from .views import api
 
     # register blueprint
     app.register_blueprint(api)
 
     # register assets
     assets.init_app(app)
+    fa.init_app(app)
+    # scss setup
+    Scss(app, static_dir='static/scss', asset_dir='static/scss')
 
     # register css assets
     # css bundle
@@ -46,5 +46,8 @@ def create_app():
     # js bundle
     js = Bundle('js/main.js', output='gen/app.js')
     assets.register('js_all', js)
+
+    # app configuration
+    app.config['SECRET_KEY'] = SECRET_KEY
 
     return app

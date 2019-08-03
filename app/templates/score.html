@@ -21,7 +21,13 @@
         <h4>Please enter your details</h4>
         <div class="form-group">
           <label for="id">ID</label>
-          <input type="number" class="form-control" id="id" placeholder="ID" />
+          <input
+            type="number"
+            class="form-control"
+            id="id"
+            placeholder="ID"
+            name="id"
+          />
         </div>
         <div class="form-group">
           <label for="age">Age</label>
@@ -30,6 +36,7 @@
             class="form-control"
             id="age"
             placeholder="age"
+            name="age"
           />
         </div>
         <br />
@@ -43,6 +50,7 @@
             class="form-control"
             id="loanamount"
             placeholder="0"
+            name="loanamount"
           />
         </div>
         <div class="form-group">
@@ -52,6 +60,7 @@
             class="form-control"
             id="fundedamount"
             placeholder="0"
+            name="fundedamount"
           />
         </div>
         <div class="form-group">
@@ -61,15 +70,17 @@
             class="form-control"
             id="duration"
             placeholder="0"
+            name="duration"
           />
         </div>
         <div class="form-group">
-          <label for="interest">Interest rates ( 0 - 20%)</label>
+          <label for="interest">Interest rates ( 0 - 100%)</label>
           <input
             type="number"
             class="form-control"
             id="interest"
             placeholder="0"
+            name="interest"
           />
         </div>
         <div class="form-group">
@@ -79,6 +90,7 @@
             class="form-control"
             id="installmentamount"
             placeholder="0"
+            name="installment"
           />
         </div>
         <div class="form-group">
@@ -88,6 +100,7 @@
             class="form-control"
             id="employment"
             placeholder="0"
+            name="employment"
           />
         </div>
         <div class="form-group">
@@ -97,15 +110,27 @@
             class="form-control"
             id="income"
             placeholder="0"
+            name="income"
           />
         </div>
         <div class="form-group">
           <label for="purpose">Purpose</label>
-          <select name="purpose" id="purpose" class="form-control">
+          <select
+            name="purpose"
+            id="purpose"
+            class="form-control"
+            name="purpose"
+          >
             <option selected>Fees</option>
             <option>Purchase</option>
             <option>Business</option>
-            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select name="status" id="status" class="form-control" name="status">
+            <option selected>unverified</option>
+            <option>Verified</option>
           </select>
         </div>
         <div class="button">

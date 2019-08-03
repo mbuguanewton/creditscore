@@ -1,11 +1,27 @@
-from . import db
+import os
 from dotenv import load_dotenv
+from flask_pymongo import MongoClient
 from functools import wraps
 from bcrypt import hashpw, gensalt
 from flask import Blueprint, redirect, render_template, jsonify, flash, request, session, url_for
+import pickle
+import pandas as pd
+from random import choice
+from sklearn.externals import joblib
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split
 
 # create a blueprint
 api = Blueprint('api', __name__)
+
+# mongo set up
+# mongodb setup
+uri = os.getenv('MONGO_URI')
+client = MongoClient(uri, connectTimeoutMS=30000, connect=False)
+db = client.creditdb
 
 # load environmental variables
 load_dotenv(verbose=True)
@@ -112,8 +128,6 @@ def login():
             return render_template('login.html', error=error)
     return render_template('login.html')
 
-# users accounts page
-
 
 @api.route('/account')
 @is_logged_in
@@ -124,6 +138,61 @@ def account():
 @api.route('/score')
 @is_logged_in
 def score():
+    return render_template('score.html')
+
+
+@api.route('/result', methods=['GET', 'POST'])
+@is_logged_in
+def result():
+
+    # Train a machine learning model
+    X1 = pd.read_csv("csv/X1.csv")
+    X2 = pd.read_csv("csv/X2.csv")
+
+    # create training data
+    X_train, X_test, Y_train, Y_test = train_test_split(X1, Y1, test_size=0.2)
+    sc = MinMaxScaler()
+    clf1 = RandomForestClassifier(
+        n_estimators=100, verbose=1, random_state=324)
+    Model = Pipeline([('scaler', sc), ('clf1', clf1)])
+    Model.fit(X_train, Y_train)
+
+    def credit_score(row):
+        probability = Model.predict_proba(row)
+        df = pd.DataFrame(probability)
+        prob = probability[:, 0]
+        print(prob)
+        thresh = 10
+        return prob * thresh
+
+    if request.method == "POST":
+
+        user = use.fi
+        result = request.form
+        name = session['name']
+        ids = request.form.get('id')
+        age = request.form.get('age')
+
+        # loan details
+        loan_amount = request.form.get('loanamount')
+        funded_amount = request.form.get('fundedamount')
+        duration = request.form.get('duration')
+        interest = request.form.get('interest')
+        installment = request.form.get('installment')
+        employment = request.form.get('employment')
+        income = request.form.get('income')
+        purpose = request.form.get('purpose')
+        status = request.form.get('status')
+
+        purpose = str(['small_business' if purpose.lower(
+        ) == "business" else "educational" if purpose.lower() == "school" else 'OTHER_Purposes'][0])
+
+        duration = str(
+            [' 36 months' if Duration == 36 else ' 60 months'][0])
+
+        status = str(
+            ['Verified' if verification.capitalize() == "Verified" else 'Not Verified'][0])
+
     return render_template('score.html')
 
 
