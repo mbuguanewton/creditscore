@@ -7,6 +7,17 @@ verify_ssl = true
 autopep8 = "*"
 
 [packages]
+h2o = "*"
+pandas = "*"
+numpy = "*"
+flask = "*"
+flask-assets = "*"
+flask-bootstrap4 = "*"
+flask-pymongo = "*"
+python-dotenv = "*"
+dnspython = "*"
+bcrypt = "*"
+flask-fontawesome = "*"
 
 [requires]
 python_version = "3.6"

@@ -22,14 +22,12 @@ body %}
     </div>
     <div class="home--content-svg">
       <img
-        src="{{url_for('static', filename = 'images/score.svg')}}"
+        src="{{url_for('static', filename = 'images/rain.svg')}}"
         alt="score"
       />
       {% if session.logged_in %}
       <a href="{{ url_for('api.score') }}" class="btn login">Get your score</a>
-      {% else %}
-      <a href="{{ url_for('api.login') }}" class="btn login">login</a>
-      {% endif %}
+      {% else %} {% endif %}
     </div>
   </div>
 </div>

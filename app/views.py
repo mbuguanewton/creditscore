@@ -1,21 +1,24 @@
 import os
+import h2o
+import pandas as pd
 from dotenv import load_dotenv
 from flask_pymongo import MongoClient
 from functools import wraps
+from .controllers import recommend
 from bcrypt import hashpw, gensalt
 from flask import Blueprint, redirect, render_template, jsonify, flash, request, session, url_for
-import pickle
-import pandas as pd
-from random import choice
-from sklearn.externals import joblib
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import train_test_split
+
+import datetime
 
 # create a blueprint
 api = Blueprint('api', __name__)
+h2o.init()
+
+model = h2o.load_model(
+    '/home/lostvane/Projects/school-project/CreditScore/app/ml_model/model/GBM_model_python_1565074809758_307')
+
+loans = pd.read_csv(
+    '/home/lostvane/Projects/school-project/CreditScore/app/ml_model/loans.csv')
 
 # mongo set up
 # mongodb setup
@@ -81,7 +84,7 @@ def register():
             flash('Your account has been successfully added', 'success')
 
             # redirect url to login page
-            return redirect(url_for('login'))
+            return redirect(url_for('api.login'))
         except Exception as error:
             print('we have a problem', error)
 
@@ -106,12 +109,14 @@ def login():
         # check if login user is available
         if login_user:
             # check if passwords match
+            print(login_user['_id'])
             if hashpw(pass_candidate.encode('utf-8'), login_user['Password']) == login_user['Password']:
                 # create a session for the user
                 session['logged_in'] = True
                 session['username'] = login_user['Username']
                 session['email'] = login_user['Email']
                 session['name'] = login_user['Name']
+                # session['id'] = login_user['_id']
 
                 # show succesful login message
                 flash('You have successfully logged in', 'success')
@@ -129,71 +134,108 @@ def login():
     return render_template('login.html')
 
 
-@api.route('/account')
-@is_logged_in
-def account():
-    return render_template('account.html')
-
-
-@api.route('/score')
+@api.route('/score', methods=["POST", "GET"])
 @is_logged_in
 def score():
-    return render_template('score.html')
-
-
-@api.route('/result', methods=['GET', 'POST'])
-@is_logged_in
-def result():
-
-    # Train a machine learning model
-    X1 = pd.read_csv("csv/X1.csv")
-    X2 = pd.read_csv("csv/X2.csv")
-
-    # create training data
-    X_train, X_test, Y_train, Y_test = train_test_split(X1, Y1, test_size=0.2)
-    sc = MinMaxScaler()
-    clf1 = RandomForestClassifier(
-        n_estimators=100, verbose=1, random_state=324)
-    Model = Pipeline([('scaler', sc), ('clf1', clf1)])
-    Model.fit(X_train, Y_train)
-
-    def credit_score(row):
-        probability = Model.predict_proba(row)
-        df = pd.DataFrame(probability)
-        prob = probability[:, 0]
-        print(prob)
-        thresh = 10
-        return prob * thresh
-
     if request.method == "POST":
+        # get form data
+        loan_amount = int(request.form.get("loanamount"))
+        funded_amnt = int(request.form.get("funded"))
+        installment = int(request.form.get("installment"))
+        int_rate = float(request.form.get("interest"))
+        # to be a select with 2 options
+        term = int(request.form.get("term"))
+        # select with 10 options
+        emp_length = int(request.form.get("employment"))
+        # select with 3 options
+        home_ownership = request.form.get("home")
+        annual_inc = int(request.form.get("income"))
+        # select with 4 options
+        purpose = request.form.get("purpose")
 
-        user = use.fi
-        result = request.form
-        name = session['name']
-        ids = request.form.get('id')
-        age = request.form.get('age')
+        # put then into a list
+        formlist = [loan_amount, funded_amnt, installment, int_rate,
+                    term, emp_length, home_ownership, annual_inc, purpose]
 
-        # loan details
-        loan_amount = request.form.get('loanamount')
-        funded_amount = request.form.get('fundedamount')
-        duration = request.form.get('duration')
-        interest = request.form.get('interest')
-        installment = request.form.get('installment')
-        employment = request.form.get('employment')
-        income = request.form.get('income')
-        purpose = request.form.get('purpose')
-        status = request.form.get('status')
+        # change the list to a dataframe
+        new_form_list = pd.DataFrame(
+            [formlist],
+            columns=['loan_amnt', 'funded_amnt', 'installment', 'int_rate',
+                     'term', 'emp_length', 'home_ownership', 'annual_inc', 'purpose'],
+        )
+        # change the dataframe to a h2o framw
+        h2o_formlist = h2o.H2OFrame(new_form_list)
+        print(h2o_formlist)
 
-        purpose = str(['small_business' if purpose.lower(
-        ) == "business" else "educational" if purpose.lower() == "school" else 'OTHER_Purposes'][0])
+        # use the model to predict based on given data
+        prediction = model.predict(h2o_formlist)
 
-        duration = str(
-            [' 36 months' if Duration == 36 else ' 60 months'][0])
+        # get the score
+        score = round(prediction[0, 1] * 100)
 
-        status = str(
-            ['Verified' if verification.capitalize() == "Verified" else 'Not Verified'][0])
+        # get probability of being good
+        good_prediction = prediction[0, 1]
 
+        # call our function on the prediction as the score
+        recom = recommend(good_prediction, loans)
+
+        # get recommendations from the dataframe
+        # banks
+        banks = [i for i in recom.BANKS[:2]]
+        # loan
+        loan = [i for i in recom.LOANS[:2]]
+        # interest
+        interest = [i for i in recom.RATES[:2]]
+        # maximum amount
+        max_amount = [i for i in recom.MAX_AMOUNT[:2]]
+
+        # connect to db and store the scores
+        scores = db.scores
+
+        # create an object
+        new_score = {
+            'User_id': session['username'],
+            'Score': score,
+            'Loan_amount': loan_amount,
+            'Funded_amount': funded_amnt,
+            'Loan_interest': int_rate,
+            'Annual_income': annual_inc,
+            'Purpose': purpose,
+            'Created': datetime.datetime.now()
+
+        }
+        # try to save it to db
+        try:
+            scores.insert_one(new_score)
+            print('your score has been saved')
+        except Exception as error:
+            print('something went wrong: ', error)
+
+        return render_template('result.html', score=score, proba=good_prediction, bank=banks, loan=loan, interest=interest, maxamount=max_amount)
     return render_template('score.html')
+
+
+@api.route('/account', methods=['GET'])
+@is_logged_in
+def account():
+    #
+    # connect to db
+    scores = db.scores
+    # initialise empty list
+    result = scores.find({'User_id': session['username']})
+    for score in result:
+        if score:
+            output = {
+                'user_id': score['User_id'],
+                'score': score['Score'],
+                'loan': score['Loan_amount'],
+                'funded': score['Funded_amount'],
+                'interest': score['Loan_interest'],
+                'income': score['Annual_income'],
+                'Purpose': score['Purpose'],
+            }
+
+    return render_template('account.html', output=output)
 
 
 @api.route('/information')

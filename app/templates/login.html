@@ -1,6 +1,10 @@
 {% extends 'layouts.html' %} {% block body %}
 <div class="form--container">
-  <form action="{{ url_for('api.login') }}" method="post">
+  <form
+    action="{{ url_for('api.login') }}"
+    method="post"
+    onsubmit="handleSubmit()"
+  >
     <h4>Login to your account</h4>
     <div class="form-group">
       <label for="username">Username</label>
@@ -25,7 +29,11 @@
       />
     </div>
     <div class="button">
-      <button type="submit" class="btn btn-primary btn-block login-btn">
+      <button
+        type="submit"
+        id="login--btn"
+        class="btn btn-primary btn-block login-btn"
+      >
         login
       </button>
     </div>
@@ -35,4 +43,6 @@
     </p>
   </form>
 </div>
+
+<!-- scripts-->
 {% endblock body %}
