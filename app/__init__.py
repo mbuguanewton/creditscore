@@ -4,8 +4,8 @@ from flask import Flask, url_for
 from flask_assets import Environment, Bundle
 from dotenv import load_dotenv
 from flask_fontawesome import FontAwesome
-from flask_scss import Scss
 import os
+import h2o
 
 # load env variables
 load_dotenv(verbose=True)
@@ -35,8 +35,6 @@ def create_app():
     # register assets
     assets.init_app(app)
     fa.init_app(app)
-    # scss setup
-    Scss(app, static_dir='static/scss', asset_dir='static/scss')
 
     # register css assets
     # css bundle

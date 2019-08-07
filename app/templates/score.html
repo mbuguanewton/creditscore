@@ -17,102 +17,124 @@
       </p>
     </div>
     <div class="score--form">
-      <form action="POST">
-        <h4>Please enter your details</h4>
-        <div class="form-group">
-          <label for="id">ID</label>
-          <input
-            type="number"
-            class="form-control"
-            id="id"
-            placeholder="ID"
-            name="id"
-          />
-        </div>
-        <div class="form-group">
-          <label for="age">Age</label>
-          <input
-            type="number"
-            class="form-control"
-            id="age"
-            placeholder="age"
-            name="age"
-          />
-        </div>
-        <br />
-
-        <h4>Enter your loan details</h4>
-
+      <form
+        action="{{ url_for('api.score') }}"
+        method="POST"
+        onsubmit="handleSubmit()"
+      >
+        <h4>Enter your loan details to calculate score</h4>
+        <!--loan amount-->
         <div class="form-group">
           <label for="loanamount">Loan amount</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             id="loanamount"
             placeholder="0"
             name="loanamount"
+            required
           />
         </div>
+        <!--funded amount-->
         <div class="form-group">
           <label for="fundedamount">Funded amount</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             id="fundedamount"
             placeholder="0"
-            name="fundedamount"
+            name="funded"
+            required
           />
         </div>
+        <!--Installment-->
         <div class="form-group">
-          <label for="duration">Duration (months)</label>
+          <label for="installment">Installment</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
-            id="duration"
+            id="installment"
             placeholder="0"
-            name="duration"
+            name="installment"
+            required
           />
         </div>
+        <!--Interest rate-->
         <div class="form-group">
-          <label for="interest">Interest rates ( 0 - 100%)</label>
+          <label for="installment">Interest Rate (0 - 25%)</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             id="interest"
             placeholder="0"
             name="interest"
+            required
           />
         </div>
+        <!--Term-->
         <div class="form-group">
-          <label for="installmentamount">Installment amount</label>
-          <input
-            type="number"
-            class="form-control"
-            id="installmentamount"
-            placeholder="0"
-            name="installment"
-          />
+          <label for="term">Term (months)</label>
+          <select
+            class="custom-select form-control"
+            id="term"
+            name="term"
+            required
+          >
+            <option selected>Choose...</option>
+            <option value="36">36</option>
+            <option value="60">60</option>
+          </select>
         </div>
+        <!--employment length-->
         <div class="form-group">
-          <label for="employment">Employment Length (years) </label>
-          <input
-            type="number"
-            class="form-control"
+          <label for="employment">Employment length (years)</label>
+          <select
+            class="custom-select form-control"
             id="employment"
-            placeholder="0"
             name="employment"
-          />
+            required
+          >
+            <option selected>Choose...</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
         </div>
+        <!-- home -->
+        <div class="form-group">
+          <label for="home">Home </label>
+          <select
+            class="custom-select form-control"
+            id="home"
+            name="home"
+            required
+          >
+            <option selected>Choose...</option>
+            <option value="OWN">OWN</option>
+            <option value="RENT">RENT</option>
+            <option value="MORTGAGE">MORTGAGE</option>
+          </select>
+        </div>
+        <!-- annual income-->
         <div class="form-group">
           <label for="income">Annual income</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             id="income"
             placeholder="0"
             name="income"
+            required
           />
         </div>
+        <!-- purpose-->
         <div class="form-group">
           <label for="purpose">Purpose</label>
           <select
@@ -120,26 +142,39 @@
             id="purpose"
             class="form-control"
             name="purpose"
+            required
           >
-            <option selected>Fees</option>
-            <option>Purchase</option>
-            <option>Business</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="status">Status</label>
-          <select name="status" id="status" class="form-control" name="status">
-            <option selected>unverified</option>
-            <option>Verified</option>
+            <option selected>choose...</option>
+            <option>small_business</option>
+            <option>major_purchase</option>
+            <option>car</option>
+            <option>credit_card</option>
+            <option>medical</option>
+            <option>other</option>
           </select>
         </div>
         <div class="button">
           <button type="submit" class="btn btn-primary btn-block score-btn">
             Submit
+            <span
+              id="score-spinner"
+              style="visibility: hidden"
+              class="spinner-border spinner-border-sm"
+            ></span>
           </button>
         </div>
       </form>
     </div>
   </div>
 </div>
+
+<!--script-->
+<script>
+  function handleSubmit(e) {
+    loginButton = document.getElementById("score--btn");
+    loginButton.classList.add("disabled");
+    spinner = document.getElementById("score-spinner").style.visibility =
+      "visible";
+  }
+</script>
 {% endblock body%}

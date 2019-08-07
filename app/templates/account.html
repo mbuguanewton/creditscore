@@ -11,11 +11,6 @@
         </h6>
         <h5 class="account--info-id"></h5>
       </div>
-      <div class="accounts--nav">
-        <a href=""><i class="fas fa-columns"></i>Overview</a>
-        <a href=""><i class="fas fa-file-alt"></i>Reports</a>
-        <a href=""><i class="fas fa-info"></i>More information</a>
-      </div>
     </aside>
 
     <main class="main--bar">
@@ -23,6 +18,37 @@
         <h4>
           Hello {{ session.name }}, this is where you will find your information
         </h4>
+        <div class="card mt-3" style="padding: 20px;">
+          <h4 style="font-weight: bold; font-family: 'Poppins';">
+            Most recent creditscore
+          </h4>
+          <hr />
+          <p>latest credit score : {{ output["score"] }}</p>
+        </div>
+        <div class="card mt-3" style="padding: 20px;">
+          <h4 style="font-weight: bold; font-family: 'Poppins';">
+            Data used to calculate the score
+          </h4>
+          <div class="container">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span>Loan amount : </span>{{ output["loan"] }}
+              </li>
+              <li class="list-group-item">
+                <span>Funded amount : </span>{{ output["funded"] }}
+              </li>
+              <li class="list-group-item">
+                <span>Interest : </span>{{ output["interest"] }} %
+              </li>
+              <li class="list-group-item">
+                <span>Annual Income : </span>{{ output["income"] }}
+              </li>
+              <li class="list-group-item">
+                <span>Purpose : </span>{{ output["Purpose"] }}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </main>
   </div>

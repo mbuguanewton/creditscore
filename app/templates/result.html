@@ -1,0 +1,56 @@
+{% extends 'layouts.html' %} {% block body%}
+<div class="container">
+  <div class="container">
+    <div class="card mt-2" style="height: 10rem; padding: 20px;">
+      <h3
+        style="color: black; text-align: center; font-size: 3rem; font-weight: bolder; font-family: 'Poppins'"
+      >
+        <span>Your Score is : </span> <br />
+        <span>{{ score }}</span>
+      </h3>
+    </div>
+    <div class="card mt-2 mb-2" style="padding: 10px;">
+    <h5 style="font-family: 'Poppins';">Interest Rates Recommendations</h5>
+    <table class="table table-bordered mt-2">
+        <th>Recommendations</th>
+        <tr scope="col">
+            {% if proba < 0.2 %}
+            <td>Credit Score : {{ proba * 100 }}</td>
+            <td>No loan</td>
+            {% elif proba < 0.3 %}
+            <td>Credit Score : {{ proba * 100 }}</td>
+            <td>Recommended interest rate: 14%</td>
+            {% elif proba < 0.4 %}
+            <td>Credit Score : {{ proba * 100 }}</td>
+            <td>Recommended interest rate: 10%</td>
+            {% elif proba < 0.5 %}
+            <td>Credit Score : {{ proba * 100 }}</td>
+            <td>Recommended interest rate: 7%</td>
+            {% elif proba > 0.5 %}
+            <td>Credit Score : {{ proba * 100 }}</td>
+            <td>Recommended interest rate: 5%</td>
+            {% endif %}
+        </tr>
+    </table>
+    </div>
+    
+  </div>
+
+  <div class="container">
+    <div class="card" style="padding: 20px;">
+        <h4>Loan Recommendations</h4>
+        {% if proba <= 0.2 %}
+            <h5 style="font-family: 'Poppins';">No loans found to recommend</h5>
+        {% else %}{% for i in range(1)%}
+        <p >
+          <h3 style="font-size: 'Poppins'; font-weight:bold;">{{ bank[i] }}</h3>
+        </p>
+        <p >Loan : {{ loan[i] }}</p>
+        <p >Interest : {{ interest[i] }}</p>
+        <p >Maximum Ammount : {{ maxamount[i] }}</p>
+         {% endfor %}{% endif %}
+    </div>
+  </div>
+</div>
+
+{%endblock body%}

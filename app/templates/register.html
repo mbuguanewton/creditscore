@@ -1,6 +1,10 @@
 {% extends 'layouts.html' %} {% block body %}
 <div class="form--container">
-  <form action="{{ url_for('api.register') }}" method="post">
+  <form
+    action="{{ url_for('api.register') }}"
+    method="post"
+    onsubmit="handleSubmit()"
+  >
     <h4>Create an account</h4>
     <div class="form-group">
       <label for="name">Name</label>
@@ -46,8 +50,17 @@
       />
     </div>
     <div class="button">
-      <button type="submit" class="btn btn-primary btn-block register-btn">
+      <button
+        type="submit"
+        id="register--btn"
+        class="btn btn-primary btn-block register-btn"
+      >
         register
+        <span
+          id="register-spinner"
+          style="visibility: hidden"
+          class="spinner-border spinner-border-sm"
+        ></span>
       </button>
     </div>
     <p>
@@ -55,4 +68,6 @@
     </p>
   </form>
 </div>
+
+<!--scripts-->
 {% endblock body %}
