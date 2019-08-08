@@ -1,1 +1,1 @@
-web: gunicorn  run:app -w 5 
+web: gunicorn  run:app -w 10 --name creditscore
