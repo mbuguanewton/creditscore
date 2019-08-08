@@ -2,8 +2,9 @@
   background: var(--primary-color);
   width: 60%;
   margin: 0 20%;
-  padding: 10px;
+  padding: 20px;
   color: #fff;
-  height: 88vh;
+  height: auto;
+  border-radius: 5px;
 }
 /*# sourceMappingURL=info.css.map */

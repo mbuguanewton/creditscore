@@ -218,9 +218,9 @@ def score():
 @api.route('/account', methods=['GET'])
 @is_logged_in
 def account():
-    #
     # connect to db
     scores = db.scores
+    output = {}
     # initialise empty list
     result = scores.find({'User_id': session['username']})
     for score in result:
@@ -239,7 +239,6 @@ def account():
 
 
 @api.route('/information')
-@is_logged_in
 def info():
     return render_template('info.html')
 
